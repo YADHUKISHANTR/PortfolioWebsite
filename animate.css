@@ -1,0 +1,33 @@
+.animate {
+  opacity: 0;
+  transform: translateY(50px); /* start below */
+  transition: all 0.9s ease-out;
+}
+
+.animate.show {
+  opacity: 1;
+  transform: translateY(0); /* move to original position */
+}
+
+#toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: #333;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, bottom 0.3s ease;
+}
+
+#toast.show {
+  opacity: 1;
+  bottom: 40px;
+}
+

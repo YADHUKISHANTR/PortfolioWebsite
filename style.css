@@ -1,0 +1,232 @@
+*,
+*::before,
+*::after{
+    box-sizing:  border-box;
+}
+:root{
+    --body-bg: hsl(196, 48%, 50%);
+}
+html{
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: rgb(255, 255, 255);
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    align-items: center;
+    padding: 20px 60px;
+    background-color: rgb(112, 190, 102);
+     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.381);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color:white;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: hsl(117, 100%, 78%);
+    cursor: pointer;
+}
+.dropdown{
+    position: relative;
+}
+.dropdown-menu {
+   position: absolute;  /* removes from normal flow */
+  top: 100%;           /* places below parent */
+  left: 0;
+  text-align: center;
+   transform: translateX(-50%);
+  
+  display: none;
+  background: rgb(140, 217, 141);
+  list-style: none;
+  padding: 10px 0;
+  min-width: 150px;
+  
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.359);
+}
+.dropdown-menu li {
+  padding: 10px 20px;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+/* Top layout */
+.top-section {
+     --title-color: rgb(41, 41, 41);
+    display: flex;
+    align-items: center;
+    padding: 40px;
+    padding-right: 450px;
+}
+
+.spacer {
+    flex-grow: 1; /* takes all extra space */
+    min-width: 100px; /* prevents getting too close on small screens */
+}
+
+.right-content {
+    max-width: 400px; /* optional: limits width */
+    
+    
+}
+h1 {
+    font-size: clamp(20px, 5vw, 55px); /* min 20px, scales with viewport, max 55px */
+    color: var(--title-color);
+    text-align: left;
+}
+
+.description {
+    font-size: clamp(14px, 2vw, 20px); /* min 14px, scales, max 20px */
+    color: var(--title-color);
+    text-align: left;
+}
+
+/* Circle Image */
+.circle {
+     width: 20vw;           /* responsive width (20% of viewport width) */
+    height: 20vw;          /* same as width to keep circle perfect */
+    min-width: 150px;      /* minimum size */
+    min-height: 150px;     /* minimum size */
+    border-radius: 50%;
+    margin: 50px;
+    overflow: hidden;
+    background: yellow;
+}
+
+.circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+
+.topsec{
+    background:rgb(200, 230, 245);  /* light cream */
+    position: relative;
+}
+.topsec::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 25%;
+   
+    background: rgb(200, 230, 245);;
+    -webkit-mask-image: url('assets/curve.svg');
+    
+    
+}
+
+.secondsec{
+    padding-block:5rem;
+    text-align: left;
+    font-family: 'Times New Roman', Times, serif;
+}
+.bottom-section{
+    padding: 60px;
+  
+}
+/* Bottom section */
+.bottom-section h2{
+   
+     font-size: 50px;
+     padding-top: 5rem;
+    color: rgb(49, 49, 49);
+}
+.bottom-section p{
+ 
+     font-size: 24px;
+     
+    color: rgb(49, 49, 49);
+}
+.bottom-section ul{
+     font-size: 24px;
+}
+
+.lastsec {
+  padding: 5rem 0;
+  display: flex;
+  background: rgb(200, 230, 245);
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* Equal split */
+.last-left,
+.last-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Social icons */
+.social-icons {
+  display: flex;
+  gap: 25px;
+}
+
+.social-icons a {
+  font-size: 28px;
+  color: #333;
+  transition: 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-5px);
+}
+
+/* Brand hover colors */
+.fa-instagram:hover { color: #E1306C; }
+.fa-linkedin:hover { color: #0077B5; }
+.fa-youtube:hover { color: #FF0000; }
+.fa-github:hover { color: #000000; }
+
+/* Contact section */
+.contact-info {
+  display: flex;
+  flex-direction: column; /* Stack top to bottom */
+  gap: 20px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+}
+
+.contact-item i {
+  font-size: 20px;
+  color: #333;
+}

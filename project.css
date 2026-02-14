@@ -1,0 +1,56 @@
+*,
+*::before,
+*::after{
+    box-sizing:  border-box;
+}
+:root{
+    --body-bg: hsl(196, 48%, 50%);
+}
+html{
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: rgb(255, 255, 255);
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    align-items: center;
+    padding: 20px 60px;
+    background-color: rgb(112, 190, 102);
+     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.381);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color:white;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: hsl(117, 100%, 78%);
+    cursor: pointer;
+}
