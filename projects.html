@@ -6,25 +6,39 @@
     <title>MY PROJECTS</title>
     
     <link rel="stylesheet" href="project.css">
-</head>
 <body>
     <nav class="navbar">
         <div class="logo">Projects</div>
 
         <ul class="nav-links">
-            <li><a href="index.html">Go Home</a></li>
+            <li><a href="">Godot Projects</a></li>
+            <li><a href="">Unity Projects</a></li>
+            <li><a href="">AI/ML Projects</a></li>
+            <li><a href="projects.html">Game Mechanics</a></li>
+            <li><a href="index.html">Home</a></li>
         </ul>
     </nav>
 
-    <section class="projects">
-        <div> 
-            <h1> Work in porgress  </h1>
+    <section class="mechsection spriteanim">
+        <div>  
+            <h1><b>Game Mechanics</b></h1>
         </div>
         <div>
-
+            <h2><b>Sprite Animation</b></h2>
+            <div class = "mechanics"> 
+                <canvas id="Spriteaimation"  width="500" height="300"></canvas>
+                
+                <p> <b>Sprite Sheet </b> <br>A sprite sheet is one image that contains multiple animation frames arranged in rows or columns. <br>Instead of loading many separate images, the game shows different parts of the same image over time to create movement (walk, run, jump, etc.).<br>The game changes the source rectangle (the cropped area of the image) every few milliseconds to switch frames and create animation.
+                <br><br><br><b>⏱️ Frame Rate (FPS) </b>
+                    <br>    Game FPS → How many times the screen updates per second (e.g., 60 FPS).
+                    <br>    Animation FPS → How fast the sprite changes frames (e.g., 10–15 FPS).
+                    <br>    A game can run at 60 FPS, but the sprite animation can run at 12 FPS for smoother control and better performance.</p>
+                
+            </div>
         </div>
-    </section>
 
-    <script src="code.js" defer></script>
+    </section>
+    <script src="spriteanimation.js"></script>
+
 </body>
 </html>
