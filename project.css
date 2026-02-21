@@ -11,6 +11,7 @@ html{
 }
 
 body {
+    --text-color: rgb(103, 103, 103);
     margin: 0;
     font-family: Arial, sans-serif;
      background-color: #f5f3ea; /* eggshell base */
@@ -21,10 +22,22 @@ body {
   background-size: 200px;
   color: #333;
 }
+div{
+    margin-left: 2%;
+}
 p{
     font-size: 18px;
+    
 }
-
+h1{
+    text-align: center;
+    color: var(--text-color);
+    font-weight: 800;
+}
+h2{
+    margin-left: 2%;
+    font-weight: 800;
+}
 /* Navbar */
 .navbar {
     display: flex;
@@ -67,12 +80,11 @@ p{
 section{
     
     text-align: left;
-    color: rgb(103, 103, 103);
+    color: var(--text-color);
+    margin-bottom: 10%;
 }
 
-section h1{
-    text-align: center;
-}
+
 
 .mechsection{
     
@@ -81,7 +93,6 @@ section h1{
 }
 .mechanics{
     display: flex;
-    
 }
 .mechanics p{
     margin:2%;
@@ -91,6 +102,11 @@ canvas{
     height: auto;
 }
 
-#Spriteaimation{
-    background-color: rgba(255, 255, 255, 0.752);
+.canv{
+    background-color: rgba(0, 0, 0, 0.497);
+}
+
+button{
+    background-color: rgb(54, 234, 57);
+    position: inherit;
 }

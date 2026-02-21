@@ -15,8 +15,46 @@ let frameTimer = 0;
 let animationFPS = 10; // change this to test
 let frameInterval = 1000 / animationFPS;
 
+
+
+//section 2
+
+let board2;
+let context2;
+let ground2;
+
+
 window.onload = function () {
 
+    onloadDraw()
+    onloadDraw2()
+};
+
+function update(timestamp) {
+
+    let deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
+
+    frameTimer += deltaTime;
+
+    context.clearRect(0, 0, boardWidth, boardHeight);
+    context2.clearRect(0,0,boardWidth,boardHeight)
+
+    if (frameTimer >= frameInterval) {
+        currentFrame++;
+        if (currentFrame >= totalFrames) {
+            currentFrame = 0;
+        }
+        frameTimer = 0;
+    }
+
+    draw();
+    Draw2();
+    requestAnimationFrame(update);
+}
+
+function onloadDraw()
+{
     board = document.getElementById("Spriteaimation");
     board.width = boardWidth;
     board.height = boardHeight;
@@ -29,28 +67,14 @@ window.onload = function () {
     spritesheetimg.onload = function () {
         requestAnimationFrame(update);
     };
+
+    let slider = document.getElementById("fpsSlider");
+    let output = document.getElementById("fpsValue");
+
+    slider.oninput = function () {
+      output.textContent = this.value;
+      frameInterval = 1000 / this.value;
 };
-
-function update(timestamp) {
-
-    let deltaTime = timestamp - lastTime;
-    lastTime = timestamp;
-
-    frameTimer += deltaTime;
-
-    context.clearRect(0, 0, boardWidth, boardHeight);
-
-    if (frameTimer >= frameInterval) {
-        currentFrame++;
-        if (currentFrame >= totalFrames) {
-            currentFrame = 0;
-        }
-        frameTimer = 0;
-    }
-
-    draw();
-
-    requestAnimationFrame(update);
 }
 
 function draw() {
@@ -63,7 +87,7 @@ function draw() {
     context.drawImage(spritesheetimg, 0, 0, newWidth, newHeight);
 
     // White border around full image
-    context.strokeStyle = "white";
+    context.strokeStyle = "#ffffff";
     context.lineWidth = 3;
     context.strokeRect(0, 0, newWidth, newHeight);
 
@@ -94,3 +118,58 @@ function draw() {
         frameHeight2
     );
 }
+
+
+
+function onloadDraw2()
+{
+    board = document.getElementById("BounceCanv");
+    board.width = boardWidth;
+    board.height = boardHeight;
+
+    context2 = board.getContext("2d");
+    context2.fillStyle = "#373737";   //color
+    context2.fillRect(0, boardHeight - 100, boardWidth, 100);
+
+
+    context2.beginPath();
+    context2.arc(250, 100, 15, 0, Math.PI * 2); 
+    context2.fillStyle = "#373737";
+    context2.fill();
+}
+
+let gravity = 0.4;
+let velY = 0;
+let position = 100; 
+let bouncebtn = document.getElementById("BounceBtn");
+
+
+function Draw2()
+{
+
+    context2.fillStyle = "#373737";   //color
+    context2.fillRect(0, boardHeight - 100, boardWidth, 100);
+
+
+    velY += gravity;
+    position += velY;
+    
+    if(position >= (boardHeight - 100) - 15)
+    {
+        position = boardHeight - 100 - 15
+        velY = -velY;
+    }
+    context2.beginPath();
+    context2.arc(250, position, 15, 0, Math.PI * 2); 
+    context2.fillStyle = "#373737";
+    context2.fill();
+
+}
+
+
+bouncebtn.addEventListener("click",function(){
+    position = 100;
+    velY = 0;
+    console.log("Button clicked!");
+});
+

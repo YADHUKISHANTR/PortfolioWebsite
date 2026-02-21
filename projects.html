@@ -19,25 +19,220 @@
         </ul>
     </nav>
 
+    <h1>Game Mechanics</h1>
     <section class="mechsection spriteanim">
-        <div>  
-            <h1><b>Game Mechanics</b></h1>
-        </div>
-        <div>
-            <h2><b>Sprite Animation</b></h2>
-            <div class = "mechanics"> 
-                <canvas id="Spriteaimation"  width="500" height="300"></canvas>
-                
-                <p> <b>Sprite Sheet </b> <br>A sprite sheet is one image that contains multiple animation frames arranged in rows or columns. <br>Instead of loading many separate images, the game shows different parts of the same image over time to create movement (walk, run, jump, etc.).<br>The game changes the source rectangle (the cropped area of the image) every few milliseconds to switch frames and create animation.
+         <h2>Sprite Sheet Animation</h2> 
+        <div class="mechanics"> 
+          
+    <canvas  class = "canv" id="Spriteaimation" width="500" height="300"></canvas>
+
+    <div class="text-section">
+        <p>
+            <p> <b>Sprite Sheet </b> <br>A sprite sheet is one image that contains multiple animation frames arranged in rows or columns. <br>Instead of loading many separate images, the game shows different parts of the same image over time to create movement (walk, run, jump, etc.).<br>The game changes the source rectangle (the cropped area of the image) every few milliseconds to switch frames and create animation.
                 <br><br><br><b>⏱️ Frame Rate (FPS) </b>
                     <br>    Game FPS → How many times the screen updates per second (e.g., 60 FPS).
                     <br>    Animation FPS → How fast the sprite changes frames (e.g., 10–15 FPS).
                     <br>    A game can run at 60 FPS, but the sprite animation can run at 12 FPS for smoother control and better performance.</p>
-                
-            </div>
+                      
+        </p>
+
+        <div class="fps-control">
+            <label for="fpsSlider">FPS:</label>
+            <input type="range" id="fpsSlider" min="1" max="24" step="1" value="10">
+            <span id="fpsValue">10</span>
+        </div>
         </div>
 
+    </div>
+
     </section>
+
+
+
+    <section class="mechsection bounce">
+         <h2>Collision Detection</h2> 
+         <div class="mechanics"> 
+
+            <canvas class = "canv" id="BounceCanv" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                <p>
+                    <p>
+                        In a 2D game, collision detection is the system that checks whether two objects, such as a ball and a wall, are touching or overlapping.<br><br>
+
+                        When the game detects that the ball has collided with the wall, it triggers a collision response.<br><br>
+
+                        One common response is bouncing, where the ball’s velocity is reversed in the direction of impact.<br><br>
+
+                        For example, if the ball hits a vertical wall, its horizontal velocity (X direction) is inverted; if it hits the ground, its vertical velocity (Y direction) is inverted.<br><br>
+
+                        This process of detecting a collision and then applying a bounce response creates realistic interaction and movement in the game.
+                    </p>
+                    
+                </p>
+
+                <div class="button">
+                    <button id="BounceBtn">Restart <br> Bounce</button>
+                </div>
+            </div>
+
+    </section>
+    
+    <section class="mechsection">
+         <h2>Procedural Animation</h2> 
+         <div class="mechanics"> 
+
+            <canvas class = "" id="" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                <p>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
+                    </p>
+                    
+                </p>
+
+                <div>
+                  
+                </div>
+            </div>
+
+    </section>
+
+
+    <section class="mechsection">
+         <h2>Euler Integration</h2> 
+         <div class="mechanics"> 
+
+            <canvas class = "" id="" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                <p>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
+                    </p>
+                    
+                </p>
+
+                <div>
+                  
+                </div>
+            </div>
+
+    </section>
+
+
+     <section class="mechsection">
+         <h2>Verlet Integration</h2> 
+         <h3>Verlet Rope Simulation</h3>
+         <div class="mechanics"> 
+
+            <canvas class = "" id="" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                <p>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
+                    </p>
+                    
+                </p>
+
+                <div>
+                  
+                </div>
+            </div>
+
+    </section>
+
+    <section class="mechsection">
+         <h2>Verlet Integration</h2> 
+         <h3>Verlet Cloth Simulation</h3>
+         <div class="mechanics"> 
+
+            <canvas class = "" id="" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                <p>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
+                    </p>
+                    
+                </p>
+
+                <div>
+                  
+                </div>
+            </div>
+
+    </section>
+    
+    <section class="mechsection">
+         <h2>Object Instantiation</h2> 
+         <div class="mechanics"> 
+
+            <canvas class = "" id="" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                <p>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
+                    </p>
+                    
+                </p>
+
+                <div>
+                  
+                </div>
+            </div>
+
+    </section>
+
+    <section class="mechsection">
+         <h2>Parallax Scrolling</h2> 
+
+         <div class="mechanics"> 
+
+            <canvas class = "" id="" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                <p>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
+                    </p>
+                    
+                </p>
+
+                <div>
+                  
+                </div>
+            </div>
+
+    </section>
+
+    <section class="mechsection">
+         <h2>Particle Effect</h2> 
+
+         <div class="mechanics"> 
+
+            <canvas class = "" id="" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                <p>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
+                    </p>
+                    
+                </p>
+
+                <div>
+                  
+                </div>
+            </div>
+
+    </section>
+
+
+
     <script src="spriteanimation.js"></script>
 
 </body>
