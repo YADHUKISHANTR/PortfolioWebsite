@@ -6,6 +6,9 @@
     <title>MY PROJECTS</title>
     
     <link rel="stylesheet" href="project.css">
+
+</head>
+
 <body>
     <nav class="navbar">
         <div class="logo">Projects</div>
@@ -78,7 +81,267 @@
 
     </section>
     
+  
+
+    <section class="mechsection euler">
+         <h2>Euler Integration</h2> 
+         <div class="mechanics"> 
+
+            <canvas class = "canv" id="EulerCanv" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                <p>
+                    <p>
+                        <b>Euler Integration</b> <br>
+                Euler Integration is a simple numerical method to simulate motion in games and physics. 
+                It updates an object’s position step by step using its velocity. <br><br>
+
+                The basic step is: <br>
+                - Update position using velocity: <br>
+                &nbsp;&nbsp;&nbsp;x = x + v * Δt <br><br>
+
+                Here: <br>
+                - <b>x</b> is position, <b>v</b> is velocity, and <b>Δt</b> is the time step. <br>
+                - Since velocity is constant, the object moves at the same speed in a given direction. <br><br>
+                    </p>
+                    
+                </p>
+                <div class = "buttonsection3">
+                        <div><p>X velocity: </p>
+                        <button id="Xminus">-</button>
+                       <span id="xVelText">0</span>
+                        <button id="Xplus">+</button>
+                    </div>
+                </div>
+
+                <div class = "buttonsection3">
+                    <div>
+                        <p>Y velocity: </p>
+                        <button id="Yminus">-</button>
+                        <span id="yVelText">0</span>
+                        <button id="Yplus">+</button>
+                    </div>
+                </div>
+                
+            </div>
+
+    </section>
+
+
+     <section class="mechsection verletropeclass">
+            <div>
+                    <h2>Verlet Integration</h2>
+
+                    <p>
+                    Verlet integration is a numerical method used to simulate motion in physics-based games and animations.
+                    It calculates a point's new position using its current position, previous position, and acceleration.
+                    Unlike Euler integration, it does not explicitly track velocity, making it more stable and energy-conserving.
+                    </p>
+
+                    <p>
+                    <b>Formula:</b>
+                    <br>
+                    <code>newPosition = currentPosition + (currentPosition - previousPosition) + acceleration * dt²</code>
+                    </p>
+
+                    <p>
+                   <b>Advantages:</b>
+                    <br>
+                    - More stable than Euler integration
+                    <br>
+                    - Conserves energy better
+                    <br>
+                    - Ideal for simulations with constraints, like ropes, cloth, and soft bodies
+                    <br>
+                    - Easy to implement for particle-based physics
+                    </p> 
+            </div>
+         <div class="mechanics"> 
+
+            <canvas class = "canv" id="RopeCanv" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                <h3><b> Rope Simulation Using Verlet Integration </b></h3>
+                    <p>
+                        A rope made with Verlet integration consists of multiple points connected by distance constraints.
+                        Each point stores its current and previous position.
+                        </p>
+
+                        <p>
+                        Instead of using velocity, movement is calculated by:
+                        <br>
+                        newPosition = currentPosition + (currentPosition - previousPosition) + gravity
+                        </p>
+
+                        <p>
+                        After updating positions, constraints are applied:
+                        <br>
+                        - Each segment tries to maintain a fixed distance between neighboring points.
+                        <br>
+                        - The system adjusts points repeatedly to keep the rope length consistent.
+                        </p>
+
+                        <p>
+                        One end of the rope can be pinned (fixed in place),
+                        while the other end swings freely due to gravity.
+                        </p>
+
+                        <p>
+                        This creates smooth, natural rope movement
+                        without directly calculating forces like in traditional physics engines.
+                     </p>
+                <div>
+                   <h4>Ankhor point position</h4>
+                  <label for="AnkhorSlider">Xpos:</label>
+                  <input type="range" id="AnkhorSlider" min="0" max="500" step="1" value="250">
+                 <span id="Xpos4">250</span>
+                </div>
+            </div>
+
+    </section>
+
+    <section class="mechsection verletclothcanv">
+         <div class="mechanics"> 
+
+            <canvas class = "canv" id="clothCanv" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                <h3><b>Cloth Simulation Using Verlet Integration</b></h3>
+
+                  <p>
+                            Cloth simulation models fabric as a grid of small particles connected by
+                            distance constraints. Each particle stores its current and previous position.
+                            Instead of using velocity directly, Verlet integration calculates motion
+                            from position differences, producing smooth and stable movement.
+                        </p>
+
+                        <p>
+                            During each frame, gravity is applied to non-anchored particles, then
+                            constraints are solved multiple times to maintain fixed distances between
+                            neighboring points. Anchored particles remain fixed in place, allowing the
+                            cloth to hang naturally while staying attached at specific points.
+                        </p>
+
+                        <ul>
+                            <li>Particles store current and previous positions</li>
+                            <li>Verlet integration creates stable motion without explicit velocity</li>
+                            <li>Distance constraints maintain cloth structure</li>
+                            <li>Multiple solver iterations improve stiffness and stability</li>
+                            <li>Anchors keep selected points fixed in space</li>
+                        </ul>
+
+                <div class = "ankhorpoints">
+                    <div>
+                        <h4>Ankhor point 1 position</h4>
+                        <label for="AnkhorSlider">Xpos:</label>
+                        <input type="range" id="Ankhor1SliderX5" min="0" max="500" step="1" value="32">
+                        <span id="AnkhorX5">32</span>
+                    </div>
+                
+
+                    <div>
+                    <h4>Ankhor point 2 position</h4>
+                     <label for="AnkhorSlider">Xpos:</label>
+                    <input type="range" id="Ankhor2SliderX5" min="0" max="500" step="1" value="248">
+                    <span id="AnkhorX52">248</span>
+
+                    </div>
+                     <div>
+                    <h4>Ankhor point 3 position</h4>
+                     <label for="AnkhorSlider">Xpos:</label>
+                    <input type="range" id="Ankhor3SliderX5" min="0" max="500" step="1" value="464">
+                    <span id="AnkhorX53">464</span>
+
+                    </div>
+                 
+                </div>
+            </div>
+
+    </section>
+    
     <section class="mechsection">
+         <h2>Object Instantiation</h2> 
+         <div class="mechanics"> 
+
+            <canvas class = "canv" id="ObjectCanv" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                   <p>
+                       Object instantiation is the process of creating a concrete instance of a class or object template in memory during program execution. 
+                        When an object is instantiated, memory is allocated and its properties are initialized with defined values. 
+                        Each instance maintains its own independent state and behavior while following the structure defined by its constructor or prototype.
+                    </p>
+
+                        <h3><b>Example: Shooting a Bullet</b></h3>
+
+                        <p>
+                        When the player shoots, a new bullet is created at a <strong>spawn point</strong> 
+                        (the tip of the gun). The bullet’s <strong>x</strong> and <strong>y</strong> 
+                        values are set to this spawn position.
+                        </p>
+
+                        <ul>
+                        <li>Create a new bullet object and push it into an array.</li>
+                        <li>Update its position every frame using its speed.</li>
+                        <li>Draw it on the canvas.</li>
+                        <li>If it moves out of bounds (beyond canvas width/height), remove it from the array.</li>
+                        </ul>
+
+                        <p>
+                        Deleting off-bound bullets prevents unnecessary memory usage and keeps the game loop efficient.
+                    </p>
+
+                <div>
+                  <button id="shootbtn">Shoot</button>
+                </div>
+            </div>
+
+    </section>
+
+    <section class="mechsection">
+         <h2>Parallax Scrolling</h2> 
+
+         <div class="mechanics"> 
+
+            <canvas class = "canv" id="PrallaxCanv" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                <p>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
+                    </p>
+                    
+                </p>
+
+                <div>
+                  
+                </div>
+            </div>
+
+    </section>
+
+    <section class="mechsection">
+         <h2>3D rendering</h2> 
+         <div class="mechanics"> 
+
+            <canvas class = "" id="" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                <p>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
+                    </p>
+                    
+                </p>
+
+                <div>
+                  
+                </div>
+            </div>
+
+    </section>
+
+      <section class="mechsection">
          <h2>Procedural Animation</h2> 
          <div class="mechanics"> 
 
@@ -99,115 +362,6 @@
 
     </section>
 
-
-    <section class="mechsection">
-         <h2>Euler Integration</h2> 
-         <div class="mechanics"> 
-
-            <canvas class = "" id="" width="500" height="300"></canvas>
-
-             <div class="text-section">
-                <p>
-                    <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
-                    </p>
-                    
-                </p>
-
-                <div>
-                  
-                </div>
-            </div>
-
-    </section>
-
-
-     <section class="mechsection">
-         <h2>Verlet Integration</h2> 
-         <h3>Verlet Rope Simulation</h3>
-         <div class="mechanics"> 
-
-            <canvas class = "" id="" width="500" height="300"></canvas>
-
-             <div class="text-section">
-                <p>
-                    <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
-                    </p>
-                    
-                </p>
-
-                <div>
-                  
-                </div>
-            </div>
-
-    </section>
-
-    <section class="mechsection">
-         <h2>Verlet Integration</h2> 
-         <h3>Verlet Cloth Simulation</h3>
-         <div class="mechanics"> 
-
-            <canvas class = "" id="" width="500" height="300"></canvas>
-
-             <div class="text-section">
-                <p>
-                    <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
-                    </p>
-                    
-                </p>
-
-                <div>
-                  
-                </div>
-            </div>
-
-    </section>
-    
-    <section class="mechsection">
-         <h2>Object Instantiation</h2> 
-         <div class="mechanics"> 
-
-            <canvas class = "" id="" width="500" height="300"></canvas>
-
-             <div class="text-section">
-                <p>
-                    <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
-                    </p>
-                    
-                </p>
-
-                <div>
-                  
-                </div>
-            </div>
-
-    </section>
-
-    <section class="mechsection">
-         <h2>Parallax Scrolling</h2> 
-
-         <div class="mechanics"> 
-
-            <canvas class = "" id="" width="500" height="300"></canvas>
-
-             <div class="text-section">
-                <p>
-                    <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
-                    </p>
-                    
-                </p>
-
-                <div>
-                  
-                </div>
-            </div>
-
-    </section>
 
     <section class="mechsection">
          <h2>Particle Effect</h2> 
@@ -232,8 +386,7 @@
     </section>
 
 
-
     <script src="spriteanimation.js"></script>
-
+   
 </body>
 </html>

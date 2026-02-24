@@ -11,6 +11,7 @@ html{
 }
 
 body {
+    --button-color: rgb(54, 234, 57);
     --text-color: rgb(103, 103, 103);
     margin: 0;
     font-family: Arial, sans-serif;
@@ -21,6 +22,7 @@ body {
   background-repeat: repeat;
   background-size: 200px;
   color: #333;
+  text-align: justify;
 }
 div{
     margin-left: 2%;
@@ -104,9 +106,38 @@ canvas{
 
 .canv{
     background-color: rgba(0, 0, 0, 0.497);
+   
 }
 
-button{
-    background-color: rgb(54, 234, 57);
+.bounce button{
+    background-color:var(--button-color);
     position: inherit;
+}
+
+.verletropeclass p{
+    margin-left: 2%;
+}
+
+.text-section h3{
+    margin-left: 2%;
+}
+
+.buttonsection3 div {
+    display: flex;           
+    align-items: center;     
+    gap: 5px;                
+    flex-direction: row;     
+}
+
+.buttonsection3 button {
+    font-size: 16px;         
+    padding: 5px 10px;       
+}
+
+.ankhorpoints{
+    display: flex;
+}
+
+#shootbtn{
+    background-color: var(--button-color);
 }
