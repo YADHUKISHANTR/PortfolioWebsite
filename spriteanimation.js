@@ -58,6 +58,7 @@ function update(timestamp) {
     Draw2();
     Draw3();
     Draw6();
+    draw7();
     requestAnimationFrame(update);
 }
 
@@ -741,11 +742,70 @@ function BulletDraw()
 let board7;
 let context7;
 
+let ParallaxImg = [];
+let parallaxSize = {
+    x: 576,
+    y: 324
+}
+let parallaxSpeed = [0.05,0.2,0.4,0.7,1.0];
+let parallaxPostion = [0,0,0,0,0];
+let parallaxPostion2 = [parallaxSize.x,parallaxSize.x,parallaxSize.x,parallaxSize.x,parallaxSize.x];
 function onloadDraw7()
 {
+    
+
     board7 = document.getElementById("PrallaxCanv");
     board7.width = boardWidth;
-    board7.height = boardHeight;
-
+    board7.height = parallaxSize.y;
     context7 = board7.getContext("2d");
+    for(let i = 0; i < 5; i++)
+    {
+        ParallaxImg.push(new Image);
+    }
+
+    ParallaxImg[0].src = "assets/parallax/1.png";
+    ParallaxImg[1].src = "assets/parallax/2.png";
+    ParallaxImg[2].src = "assets/parallax/3.png";
+    ParallaxImg[3].src = "assets/parallax/4.png";
+    ParallaxImg[4].src = "assets/parallax/5.png";
+
+
+    for(let i = 0; i < 5; i++)
+    {
+        ParallaxImg[i].onload = function(){
+        
+            context7.drawImage(ParallaxImg[i], 0, 0, parallaxSize.x, parallaxSize.y);
+
+        }
+    }
+   
+    
+   
+}
+
+function draw7()
+{
+    context7.clearRect(0,0,parallaxSize.x,parallaxSize.y);
+
+    for(let i = 0; i < 5; i++)
+    {
+        if(parallaxPostion[i] <= -parallaxSize.x)
+        {
+            parallaxPostion[i] = parallaxSize.x;
+        }
+        if(parallaxPostion2[i] <= -parallaxSize.x)
+        {
+            parallaxPostion2[i] = parallaxSize.x;
+        }
+
+        context7.drawImage(ParallaxImg[i], parallaxPostion[i], 0, parallaxSize.x, parallaxSize.y);
+        context7.drawImage(ParallaxImg[i], parallaxPostion2[i], 0, parallaxSize.x, parallaxSize.y);
+
+        parallaxPostion[i] -= parallaxSpeed[i];
+        parallaxPostion2[i] -= parallaxSpeed[i];
+
+      
+        //context7.drawImage(ParallaxImg[i],parallaxSize.x,0,parallaxSize.x,parallaxSize.y); 
+    }
+
 }

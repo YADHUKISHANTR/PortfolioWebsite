@@ -94,12 +94,11 @@
                     <p>
                         <b>Euler Integration</b> <br>
                 Euler Integration is a simple numerical method to simulate motion in games and physics. 
-                It updates an object’s position step by step using its velocity. <br><br>
+                It updates an object’s position step by step using its velocity. Acceleration can be also used to increase the velocity <br> v = v + a * Δt  <br>x = x + v * Δt <br><br>
 
                 The basic step is: <br>
                 - Update position using velocity: <br>
                 &nbsp;&nbsp;&nbsp;x = x + v * Δt <br><br>
-
                 Here: <br>
                 - <b>x</b> is position, <b>v</b> is velocity, and <b>Δt</b> is the time step. <br>
                 - Since velocity is constant, the object moves at the same speed in a given direction. <br><br>
@@ -306,12 +305,26 @@
             <canvas class = "canv" id="PrallaxCanv" width="500" height="300"></canvas>
 
              <div class="text-section">
-                <p>
                     <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
+                        Parallax scrolling is a visual technique used in 2D games and web design where multiple background layers move at different speeds to create an illusion of depth. 
+                        Objects that are farther away (like mountains) move slower, while closer objects (like trees or foreground elements) move faster. 
+                        This speed difference simulates perspective and makes a flat scene feel more dynamic and immersive.
+                        </p>
+
+                        <h3>Method to Implement Parallax Scrolling</h3>
+
+                        <ul>
+                        <li>Create multiple background layers (e.g.buildings, sky, mountains, trees).</li>
+                        <li>Assign each layer a different movement speed (far layers = slower, near layers = faster).</li>
+                        <li>Update each layer’s position inside the game loop or scroll event.</li>
+                        <li>Reset the layer position when it moves off-screen to create a continuous scrolling effect.</li>
+                        <li>Render layers in order from farthest to nearest to maintain depth illusion.</li>
+                        </ul>
+
+                        <p>
+                        The key concept is multiplying the main camera or scroll movement by a speed factor (between 0 and 1) for distant layers. 
+                        For example, if the player moves 10 pixels, a far background layer might move only 3 pixels, while a closer layer might move 8 pixels.
                     </p>
-                    
-                </p>
 
                 <div>
                   
