@@ -763,11 +763,11 @@ function onloadDraw7()
         ParallaxImg.push(new Image);
     }
 
-    ParallaxImg[0].src = "assets/1.png";
-    ParallaxImg[1].src = "assets/2.png";
-    ParallaxImg[2].src = "assets/3.png";
-    ParallaxImg[3].src = "assets/4.png";
-    ParallaxImg[4].src = "assets/5.png";
+    ParallaxImg[0].src = "bgimages/1.png";
+    ParallaxImg[1].src = "bgimages/2.png";
+    ParallaxImg[2].src = "bgimages/3.png";
+    ParallaxImg[3].src = "bgimages/4.png";
+    ParallaxImg[4].src = "bgimages/5.png";
 
 
     for(let i = 0; i < 5; i++)
@@ -805,7 +805,7 @@ function draw7()
         parallaxPostion2[i] -= parallaxSpeed[i];
 
       
-        //context7.drawImage(ParallaxImg[i],parallaxSize.x,0,parallaxSize.x,parallaxSize.y); 
+       
     }
 
 }
