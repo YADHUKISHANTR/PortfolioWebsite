@@ -763,11 +763,11 @@ function onloadDraw7()
         ParallaxImg.push(new Image);
     }
 
-    ParallaxImg[0].src = "assets/parallax/1.png";
-    ParallaxImg[1].src = "assets/parallax/2.png";
-    ParallaxImg[2].src = "assets/parallax/3.png";
-    ParallaxImg[3].src = "assets/parallax/4.png";
-    ParallaxImg[4].src = "assets/parallax/5.png";
+    ParallaxImg[0].src = "assets/1.png";
+    ParallaxImg[1].src = "assets/2.png";
+    ParallaxImg[2].src = "assets/3.png";
+    ParallaxImg[3].src = "assets/4.png";
+    ParallaxImg[4].src = "assets/5.png";
 
 
     for(let i = 0; i < 5; i++)
