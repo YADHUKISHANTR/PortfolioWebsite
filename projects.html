@@ -126,7 +126,6 @@
 
     </section>
 
-
      <section class="mechsection verletropeclass">
             <div>
                     <h2>Verlet Integration</h2>
@@ -332,27 +331,70 @@
             </div>
 
     </section>
+    
 
     <section class="mechsection">
-         <h2>3D rendering</h2> 
+         <h2>3D Wireframe Rendering Using Manual Projection</h2> 
          <div class="mechanics"> 
 
-            <canvas class = "" id="" width="500" height="300"></canvas>
+            <canvas class = "canv" id="3dCanv" width="500" height="300">
+               
+            </canvas>
 
              <div class="text-section">
                 <p>
-                    <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
+                    This system implements a basic 3D wireframe engine using JavaScript and the HTML5 Canvas API, without relying on WebGL. 
+                    Each shape is defined by a <strong>vertex array</strong> (3D coordinates) and an <strong>edge index array</strong> 
+                    that determines how vertices are connected to form a wireframe structure.
                     </p>
-                    
+
+                    <h3>Rendering Pipeline</h3>
+                    <ol>
+                    <li>
+                        <strong>Rotation:</strong> Vertices are rotated using trigonometric rotation formulas 
+                        (XZ & XY plane rotation in this case) to create continuous animation.
+                    </li>
+                    <li>
+                        <strong>Translation:</strong> The object is translated along the Z-axis so it remains 
+                        in front of the virtual camera.
+                    </li>
+                    <li>
+                        <strong>Perspective Projection:</strong> A focal length formula is applied to simulate depth:
+                        <pre>
+                    x' = (f * x) / z
+                    y' = (f * y) / z
+                        </pre>
+                        This makes distant points appear smaller, producing a realistic 3D effect.
+                    </li>
+                    <li>
+                        <strong>Screen Mapping:</strong> Projected coordinates (range -1 to 1) are converted 
+                        into canvas pixel coordinates.
+                    </li>
+                    </ol>
+
+                    <h3>Animation Loop</h3>
+                    <p>
+                    At a fixed FPS, the canvas is cleared, vertices are transformed and projected, 
+                    and lines are drawn between connected vertex pairs. A button dynamically switches 
+                    between different predefined geometries by updating the active vertex and edge arrays.
+                    </p>
+
+                    <p>
+                    Overall, this demonstrates the fundamental concepts of a 3D graphics pipeline: 
+                    geometric modeling, transformation, perspective projection, and rasterization — 
+                    all implemented manually.
                 </p>
 
                 <div>
-                  
+                    
+                  <button id = "ChangeWireframe">Change</button>
+                   <button id = "showline">Show Line</button>
+                    <button id = "showpoint">Show Point</button>
                 </div>
             </div>
 
     </section>
+
 
       <section class="mechsection">
          <h2>Procedural Animation</h2> 
@@ -374,6 +416,30 @@
             </div>
 
     </section>
+
+
+    <section class="mechsection">
+         <h2>RagDoll</h2> 
+
+         <div class="mechanics"> 
+
+            <canvas class = "" id="" width="500" height="300"></canvas>
+
+             <div class="text-section">
+                <p>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
+                    </p>
+                    
+                </p>
+
+                <div>
+                  
+                </div>
+            </div>
+
+    </section>
+
 
 
     <section class="mechsection">

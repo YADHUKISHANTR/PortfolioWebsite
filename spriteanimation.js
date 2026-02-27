@@ -34,6 +34,7 @@ window.onload = function () {
     onloadDraw5();
     onloadDraw6();
     onloadDraw7();
+    onloadDraw8();
 };
 
 function update(timestamp) {
@@ -808,4 +809,381 @@ function draw7()
        
     }
 
+}
+
+//section 8
+
+let board8;
+let context8;
+const FPS = 60;
+let dz = 2;
+let angle = 0;
+let  changbtn = document.getElementById("ChangeWireframe");
+let showl = document.getElementById("showline");
+let showp = document.getElementById("showpoint");
+
+
+let chanum = 1;
+
+//cube
+const vsCube = [
+    {x : 0.5, y: 0.5, z: 0.25},   //0
+    {x : -0.5, y: 0.5, z: 0.25},  //1
+    {x : -0.5, y: -0.5, z: 0.25}, //2
+    {x : 0.5, y: -0.5, z: 0.25},  //3
+
+    {x : 0.5, y: 0.5, z: -0.5},   //4
+    {x : -0.5, y: 0.5, z: -0.5},  //5
+    {x : -0.5, y: -0.5, z: -0.5}, //6
+    {x : 0.5, y: -0.5, z: -0.5},  //7
+];
+
+const fsCube = [
+    [0,1,2,3],
+    [4,5,6,7],
+    [0,4],
+    [1,5],
+    [2,6],
+    [3,7],
+];
+
+//Pyramid
+const vsPiramid = [
+    {x:-0.4, y:-0.4, z:0.4},  //0
+    {x: 0.4, y:-0.4, z:0.4},  //1
+    {x: 0.4, y:-0.4, z:-0.4}, //2
+    {x:-0.4, y:-0.4, z:-0.4}, //3
+    {x: 0.0, y: 0.5,  z:0.0}, //4 apex
+];
+
+const fsPiramid = [
+    [0,1],[1,2],[2,3],[3,0], // base
+    [0,4],[1,4],[2,4],[3,4], // sides
+];
+
+const vsCuboid = [
+    {x:-0.5, y:0.3,  z:0.3},   //0
+    {x: 0.5, y:0.3,  z:0.3},   //1
+    {x: 0.5, y:-0.3, z:0.3},   //2
+    {x:-0.5, y:-0.3, z:0.3},   //3
+    {x:-0.5, y:0.3,  z:-0.3},  //4
+    {x: 0.5, y:0.3,  z:-0.3},  //5
+    {x: 0.5, y:-0.3, z:-0.3},  //6
+    {x:-0.5, y:-0.3, z:-0.3},  //7
+];
+
+const fsCuboid = [
+    [0,1],[1,2],[2,3],[3,0],
+    [4,5],[5,6],[6,7],[7,4],
+    [0,4],[1,5],[2,6],[3,7],
+];
+
+const vsDiomond = [
+    {x:0,   y:0.6, z:0},   //0 top
+    {x:0,   y:-0.6,z:0},   //1 bottom
+    {x:0.6, y:0,   z:0},   //2 right
+    {x:-0.6,y:0,   z:0},   //3 left
+    {x:0,   y:0,   z:0.6}, //4 front
+    {x:0,   y:0,   z:-0.6},//5 back
+];
+
+const fsDiomond = [
+    [0,2],[0,3],[0,4],[0,5],
+    [1,2],[1,3],[1,4],[1,5],
+    [2,4],[4,3],[3,5],[5,2],
+];
+
+const vsTetrahedron = [
+    {x:0,    y:0.6,  z:0},     //0 top
+    {x:-0.5, y:-0.4, z:0.4},   //1
+    {x:0.5,  y:-0.4, z:0.4},   //2
+    {x:0,    y:-0.4, z:-0.5},  //3
+];
+
+const fsTetrahedron = [
+    [0,1],[0,2],[0,3],
+    [1,2],[2,3],[3,1],
+];
+
+const vsYB = [
+       /* ===== HEART OUTLINE (SMOOTH) ===== */
+
+        {x:0.0,  y:-0.85, z:0},   //0 bottom tip
+
+        // left side
+        {x:-0.25,y:-0.65,z:0},    //1
+        {x:-0.55,y:-0.35,z:0},    //2
+        {x:-0.75,y:0.05, z:0},    //3
+        {x:-0.65,y:0.45, z:0},    //4
+        {x:-0.35,y:0.70, z:0},    //5
+
+        // top center dip
+        {x:0.0,  y:0.55, z:0},    //6
+
+        // right side (mirror)
+        {x:0.35,y:0.70, z:0},     //7
+        {x:0.65,y:0.45, z:0},     //8
+        {x:0.75,y:0.05, z:0},     //9
+        {x:0.55,y:-0.35,z:0},     //10
+        {x:0.25,y:-0.65,z:0},     //11
+
+
+        /* ===== LETTER D (CENTERED PROPERLY) ===== */
+
+        {x:-0.20,y:0.35,z:0},     //12 spine top
+        {x:-0.20,y:-0.35,z:0},    //13 spine bottom
+
+        {x:0.15,y:0.25,z:0},      //14 curve top
+        {x:0.25,y:0.0, z:0},      //15 mid curve
+        {x:0.15,y:-0.25,z:0},     //16 curve bottom
+
+            
+];
+
+const fsYB = [
+
+   /* ===== HEART OUTLINE ===== */
+[0,1],
+[1,2],
+[2,3],
+[3,4],
+[4,5],
+[5,6],
+[6,7],
+[7,8],
+[8,9],
+[9,10],
+[10,11],
+[11,0],
+
+/* ===== LETTER D ===== */
+[12,13],      // spine
+[12,14],
+[14,15],
+[15,16],
+[16,13],
+
+
+];
+
+
+let vs = vsCube;
+let fs = fsCube;
+let showpoint = false;
+let showline = true;
+
+changbtn.addEventListener("click",function(){
+    
+    chanum++;
+    if(chanum === 7)
+    {
+        chanum = 1;
+    }
+    switch(chanum)
+    {
+        case 1: vs = vsCube;
+                fs = fsCube;
+        break;
+        case 2: vs = vsPiramid;
+                fs = fsPiramid;
+        break;
+        case 3: vs = vsCuboid;
+                fs = fsCuboid;
+        break;
+        case 4: vs = vsDiomond;
+                fs = fsDiomond;
+        break;
+        case 5: vs = vsTetrahedron;
+                fs = fsTetrahedron;
+        break;
+        case 6: vs = vsYB;
+                fs = fsYB;
+        break;
+        
+    }
+    
+
+});
+
+showl.addEventListener("click",function(){
+    showline = !showline;
+    if(showline)
+        showl.style.backgroundColor = "#4bdd3a";
+    else
+        showl.style.backgroundColor = "#dd3a3a"
+});
+
+showp.addEventListener("click",function(){
+    showpoint = !showpoint;
+    if(showpoint)
+        showp.style.backgroundColor = "#4bdd3a"
+    else
+        showp.style.backgroundColor = "#dd3a3a"
+
+    
+});
+function onloadDraw8()
+{
+
+    
+    showp.style.backgroundColor = "#dd3a3a";
+
+    board8 = document.getElementById("3dCanv");
+    board8.width = boardWidth;
+    board8.height = boardHeight;
+   
+    context8 = board8.getContext("2d");
+
+    setTimeout(update8, 1000/FPS);
+}
+
+function translate_z({x,y,z},dz)
+{
+    return {x, y, z: z+dz};
+}
+
+function rotate_xz({x,y,z},angle)
+{
+    const c = Math.cos(angle);
+    const s = Math.sin(angle);
+    return{
+        x: x*c-z*s,
+        y,
+        z:x*s+z*c,
+    };
+}
+function rotate_xy({x,y,z}, angle)
+{
+    const c = Math.cos(angle);
+    const s = Math.sin(angle);
+    return {
+        x: x*c - y*s,
+        y: x*s + y*c,
+        z: z
+    };
+}
+
+function update8()
+{
+    const dt = 0.5/FPS;
+    //dz += 1 * dt;
+    angle += Math.PI*dt;
+    context8.clearRect(0,0,board8.width,board8.height);
+    
+    context8.font = "20px Arial";
+    context8.fillStyle = "white";
+
+    
+    switch(chanum)
+    {
+        case 1:context8.fillText("Cube",20,30);
+        break;
+        case 2: context8.fillText("Pyramid",20,30);
+        break;
+        case 3:context8.fillText("Cuboid",20,30);
+        break;
+        case 4: context8.fillText("Diomond",20,30);
+        break;
+        case 5: context8.fillText("Tetrahedron",20,30);
+        break;
+        case 6:context8.fillText("Heart",20,30);
+        break;
+        
+    }
+
+    if(showpoint)
+    {
+        for(const v of vs)
+        {
+            if(chanum == 2 || chanum == 5 || chanum == 6)
+            {
+                point(screen(project3d(translate_z(rotate_xz(v,angle),dz))));
+            }
+            else
+            {
+                point(screen(project3d(translate_z(rotate_xy(rotate_xz(v,angle),angle),dz))));
+            }
+            
+        }
+    }
+   
+    if(showline)
+    {
+
+        for(const f of fs)
+        {
+            for(let i = 0; i < f.length; ++i)
+            {
+                if(chanum == 2 || chanum == 5 || chanum == 6)
+                {
+                    const a = vs[f[i]]; 
+                    const b = vs[f[(i+1)%f.length]]; 
+                    line8(screen(project3d(translate_z(rotate_xz(a,angle),dz))), screen(project3d(translate_z(rotate_xz(b,angle),dz))));
+                }
+                else{
+                    const a = vs[f[i]];
+                const b = vs[f[(i+1)%f.length]];
+
+                const ta = translate_z(
+                                rotate_xy(
+                                    rotate_xz(a, angle),
+                                angle),
+                            dz);
+
+                const tb = translate_z(
+                                rotate_xy(
+                                    rotate_xz(b, angle),
+                                angle),
+                            dz);
+
+                line8(
+                    screen(project3d(ta)),
+                    screen(project3d(tb))
+                );
+            }
+                
+            }
+        }
+    }
+
+    setTimeout(update8, 1000/FPS);
+
+}
+
+function point({x,y})
+{
+    const s = 15;
+    /*context8.fillStyle = "white";
+    context8.fillRect(x - s/2,y-s/2,s,s);*/
+
+    context8.beginPath();
+    context8.arc(x, y, circlesize / 2, 0, Math.PI * 2);
+    context8.fillStyle = "white";
+    context8.fill();
+}
+
+function line8(p1,p2)
+{
+    context8.lineWidth = 3;
+    context8.strokeStyle = primaryColor;
+    context8.beginPath();
+    context8.moveTo(p1.x,p1.y);
+    context8.lineTo(p2.x,p2.y);
+    context8.stroke();
+}
+function screen(p)
+{
+   return{
+    x: (p.x + 1)/2*board8.width,
+    y: (1 - (p.y + 1)/2)* board8.height,
+   }
+}
+
+function project3d({x,y,z})
+{
+    const f = 1.5; // focal length
+    return {
+        x: (f * x) / z,
+        y: (f * y) / z,
+    };
 }

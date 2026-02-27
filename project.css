@@ -138,6 +138,7 @@ canvas{
     display: flex;
 }
 
-#shootbtn{
-    background-color: var(--button-color);
+
+.mechsection button{
+     background-color: var(--button-color);
 }
