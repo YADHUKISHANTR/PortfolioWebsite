@@ -106,6 +106,8 @@ canvas{
 
 .canv{
     background-color: rgba(0, 0, 0, 0.497);
+    height: 500px;
+    width: 500px;
    
 }
 
@@ -141,4 +143,8 @@ canvas{
 
 .mechsection button{
      background-color: var(--button-color);
+}
+
+.Highlight{
+    color: rgb(91, 177, 67);
 }

@@ -14,9 +14,9 @@
         <div class="logo">Projects</div>
 
         <ul class="nav-links">
-            <li><a href="">Godot Projects</a></li>
-            <li><a href="">Unity Projects</a></li>
-            <li><a href="">AI/ML Projects</a></li>
+            <li><a href="https://github.com/YADHUKISHANTR/Egg-Game">Godot Projects</a></li>
+            <li><a href="https://github.com/YADHUKISHANTR/Unity-Mini-Games">Unity Projects</a></li>
+            <li><a href="https://github.com/YADHUKISHANTR/Sign-Language-Translator">AI/ML Projects</a></li>
             <li><a href="projects.html">Game Mechanics</a></li>
             <li><a href="index.html">Home</a></li>
         </ul>
@@ -400,16 +400,30 @@
          <h2>Procedural Animation</h2> 
          <div class="mechanics"> 
 
-            <canvas class = "" id="" width="500" height="300"></canvas>
+            <canvas class = "canv" id="proceduralcanv" width="500" height="300"></canvas>
 
              <div class="text-section">
-                <p>
                     <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
+                        <strong>Procedural Animation:</strong> Procedural animation is a technique in computer graphics and game development where the motion, behavior, and interactions of objects are generated dynamically using algorithms instead of being pre-recorded or hand-drawn. Unlike traditional animation, where every frame is created manually, procedural animation allows objects to respond to changing conditions, user input, physics, or other objects in real-time. This makes the movement more flexible, adaptive, and realistic. It is widely used for simulating natural phenomena, particle systems, character motion, and interactive effects in games and simulations.
                     </p>
-                    
-                </p>
 
+                    <p>
+                        <strong>Equation to move an object toward an angle θ:</strong><br>
+                        newX = x + Math.cos(angle) * speed<br>
+                        newY = y + Math.sin(angle) * speed<br>
+                        <em>Where:</em> x and y are the current coordinates of the object, angle is the direction toward the target, and speed is how fast the object moves.
+                    </p>
+
+                    <p>
+                        <strong>Example:</strong> Moving an object toward the pointer:<br>
+                        dx = pointerX - objectX<br>
+                        dy = pointerY - objectY<br>
+                        angle = Math.atan2(dy, dx)<br>
+                        objectX += Math.cos(angle) * speed<br>
+                        objectY += Math.sin(angle) * speed<br>
+                        <em>This makes the object follow the pointer smoothly, adjusting its path dynamically as the pointer moves.</em>
+                    </p>
+                    <p class="Highlight"> Touch the canvs to make the object move towards the point</p>
                 <div>
                   
                 </div>

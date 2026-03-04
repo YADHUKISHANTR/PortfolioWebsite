@@ -35,6 +35,7 @@ window.onload = function () {
     onloadDraw6();
     onloadDraw7();
     onloadDraw8();
+    onloadDraw9();
 };
 
 function update(timestamp) {
@@ -60,6 +61,7 @@ function update(timestamp) {
     Draw3();
     Draw6();
     draw7();
+    Draw9();
     requestAnimationFrame(update);
 }
 
@@ -1187,3 +1189,174 @@ function project3d({x,y,z})
         y: (f * y) / z,
     };
 }
+
+
+//section 9
+
+let board9;
+let context9;
+
+let mousex;
+let mousey;
+
+let xpos9 = 250;
+let ypos9 = 250;
+let angle9 = 0;
+board9 = document.getElementById("proceduralcanv");
+
+let speed9 = 2;
+
+let circlelistcurrent = [];
+let circlelistprevious = [];
+for(let i = 0; i < 75; i++)
+{
+    circlelistcurrent.push({
+        x: 250,
+        y:250
+    });
+}
+for(let i = 0; i < 75; i++)
+{
+    circlelistprevious.push({
+        x: 250,
+        y:250
+    });
+}
+
+
+function onloadDraw9()
+{
+    board9.width = boardWidth;
+    board9.height = boardHeight;
+    context9 = board9.getContext("2d");
+
+    drawCircles(250,250,circlesize*1.5);
+    
+   
+   
+}
+
+function Draw9()
+{
+    if(mousex == null || mousey == null) return;
+    context9.clearRect(0,0,board9.width,board9.height);
+
+
+
+    xpos9 = xpos9 + Math.cos(angle9) * speed9;
+    ypos9 = ypos9 + Math.sin(angle9) * speed9;
+    drawCircles(xpos9,ypos9,circlesize*1.5);
+
+    for(let i = 0; i < circlelistcurrent.length; i++)
+    {
+        if(i == 0)
+        {
+            circlelistprevious[i] = circlelistcurrent[i];
+            circlelistcurrent[i] = {x: xpos9,y:ypos9};
+            drawChildCircle(circlelistcurrent[i].x,circlelistcurrent[i].y,circlesize*1.5);
+            continue;
+        }
+
+        circlelistprevious[i] = circlelistcurrent[i];
+        circlelistcurrent[i] = circlelistprevious[i-1];
+        drawChildCircle(circlelistcurrent[i].x,circlelistcurrent[i].y,circlesize*1.5 - i/8);
+    }
+
+    const innerRadius = circlesize * 0.2; 
+    context9.beginPath();
+    context9.arc(xpos9, ypos9, innerRadius, 0, Math.PI * 2);
+    context9.fillStyle = "white";
+    context9.fill();
+   
+    
+}
+
+function drawCircles(xpos,ypos,cSize)
+{
+    const disty = mousey - ypos;
+    const distx = mousex - xpos;
+    const targetangle = Math.atan2(disty, distx);
+
+    angle9 = lerpAngle(angle9,targetangle,0.02);
+    
+
+    context9.save();                 // Save the current state
+    context9.translate(xpos, ypos);  
+    context9.rotate(angle9);          
+
+    // Draw the circle
+    context9.beginPath();
+    context9.arc(0, 0, cSize, 0, Math.PI * 2);
+    //context9.lineWidth = 1.7;
+    context9.fillStyle = primaryColor;
+    context9.fill();
+
+    const innerRadius = cSize * 0.4; // 40% of big circle radius
+    context9.beginPath();
+    context9.arc(0, 0, innerRadius, 0, Math.PI * 2);
+    context9.fillStyle = "white";
+    context9.fill();
+
+
+    // Draw a line pointing "forward" (rotated)
+    /*context9.beginPath();
+    context9.moveTo(0, 0);
+    context9.lineTo(cSize, 0); // x-axis is forward after rotation
+    context9.stroke();*/
+
+    context9.restore();      
+
+}
+
+
+function drawChildCircle(xpos,ypos,csize)
+{
+    context9.beginPath();
+    context9.arc(xpos,ypos,csize,0,Math.PI*2);
+    //context9.lineWidth = 1.7;
+    context9.fillStyle = primaryColor;
+    context9.fill();
+
+}
+
+
+function lerpAngle(current, target, t) {
+    // Guard against NaN/undefined inputs
+    if (!isFinite(current)) current = 0;
+    if (!isFinite(target)) return current;
+
+    let delta = target - current;
+
+    // Wrap delta to [-PI, PI] shortest path
+    delta = ((delta + Math.PI) % (Math.PI * 2)) - Math.PI;
+    if (delta < -Math.PI) delta += Math.PI * 2;
+
+    return current + delta * t;
+}
+
+board9.addEventListener("mousemove", function(event) {
+
+    const rect = board9.getBoundingClientRect();
+
+    mousex = event.clientX - rect.left;
+    mousey = event.clientY - rect.top;
+
+    console.log("Mouse X:", mousex);
+    console.log("Mouse Y:", mousey);
+
+
+});
+
+board9.addEventListener("touchmove", function(event) {
+
+    const rect = board9.getBoundingClientRect();
+
+    mousex = event.clientX - rect.left;
+    mousey = event.clientY - rect.top;
+
+    console.log("Mouse X:", mousex);
+    console.log("Mouse Y:", mousey);
+
+
+});
+
