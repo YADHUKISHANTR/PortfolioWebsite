@@ -423,7 +423,7 @@
                         objectY += Math.sin(angle) * speed<br>
                         <em>This makes the object follow the pointer smoothly, adjusting its path dynamically as the pointer moves.</em>
                     </p>
-                    <p class="Highlight"> Touch the canvs to make the object move towards the point</p>
+                    <p class="Highlight">👈Touch the canvs to make the object move towards the point</p>
                 <div>
                   
                 </div>
@@ -437,16 +437,38 @@
 
          <div class="mechanics"> 
 
-            <canvas class = "" id="" width="500" height="300"></canvas>
+            <canvas class = "canv" id="dollcanv" width="500" height="300"></canvas>
 
              <div class="text-section">
                 <p>
-                    <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
+                    Ragdoll simulation is a technique used in physics-based animation to create realistic character movement.
+                    Usually, games implement ragdolls using a skeletal system made of bones connected by joints and controlled
+                    by a physics engine. These bones are constrained so that the character behaves like a flexible body when
+                    external forces are applied.
                     </p>
-                    
-                </p>
 
+                    <p> If proper physics constraints are not applied to a ragdoll, the movement can look unstable and floppy, similar to a drunk person</p>
+                    <h3>Implementation</h3>
+
+                    <p>
+                    In this implementation, the ragdoll is represented using simple particles called joints instead of a full
+                    bone system. Each joint stores its current and previous position and represents parts of the body such as
+                    the head, neck, hands, torso, and legs. Lines are drawn between these joints to visually represent the
+                    connections between body parts.
+                    </p>
+
+                    <p>
+                    The motion of the joints is calculated using Verlet Integration. The new position is computed from the
+                    current and previous positions while applying gravity. Distance constraints are repeatedly solved between
+                    connected joints to maintain fixed lengths, which act like bones and keep the ragdoll structure intact.
+                    </p>
+
+                    <p>
+                    Ground constraints prevent joints from passing through the floor and apply damping to reduce bouncing.
+                    The head joint can also be dragged with the mouse, allowing the user to interact with the ragdoll and
+                    observe how the connected joints react to the movement.
+                </p>
+                <p class="Highlight">👈Touch the canvas to move the ragdoll</p>
                 <div>
                   
                 </div>
@@ -461,15 +483,49 @@
 
          <div class="mechanics"> 
 
-            <canvas class = "" id="" width="500" height="300"></canvas>
+            <canvas class = "canv" id="ParticleCanv" width="500" height="300"></canvas>
 
              <div class="text-section">
                 <p>
-                    <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit dolorum magni possimus dicta, eius, dolores ea, tempore ratione aperiam eos voluptates cupiditate doloribus aspernatur soluta odio delectus recusandae earum perferendis.
-                    </p>
+                  <p>
+                        Particle effects are a technique used in computer graphics to simulate complex
+                        natural phenomena by using a large number of small visual elements called
+                        particles. Instead of rendering a single detailed object, many small particles
+                        are generated and animated to collectively create the illusion of effects such
+                        as fire, smoke, rain, explosions, and fireworks.
+                        </p>
+
+                        <p>
+                        Each particle usually has properties such as position, velocity, color, and
+                        lifetime. These properties change over time to create motion and visual
+                        variation. By updating and drawing many particles every frame, complex dynamic
+                        effects can be produced with relatively simple rules.
+                        </p>
+
+                        <h2>Fireworks as a Particle Effect</h2>
+
+                        <p>
+                        Fireworks are a common example of particle effects. A firework typically begins
+                        as a single projectile that travels upward. Once it reaches a certain height,
+                        it explodes and generates many particles that spread outward in different
+                        directions.
+                        </p>
+
+                        <p>
+                        Each particle represents a small glowing fragment of the explosion. The
+                        particles move away from the center, gradually slow down, fade in brightness,
+                        and eventually disappear after their lifetime ends. Different colors can also
+                        be assigned to particles to create visually appealing bursts of light.
+                        </p>
+
+                        <p>
+                        By combining motion, color variation, and particle lifetimes, a realistic
+                        firework explosion can be simulated. This approach allows complex visual
+                        effects to be created using many simple particles working together.
+                        </p>
                     
                 </p>
+                 <p class="Highlight">👈Touch the canvas for fireworks</p>
 
                 <div>
                   

@@ -15,7 +15,7 @@ let frameTimer = 0;
 let animationFPS = 10; // change this to test
 let frameInterval = 1000 / animationFPS;
 
-let primaryColor = "#373737"
+let primaryColor = "rgb(55, 55, 55)"
 
 //section 2
 
@@ -36,6 +36,9 @@ window.onload = function () {
     onloadDraw7();
     onloadDraw8();
     onloadDraw9();
+    onloadDraw10();
+    onloadDraw11();
+
 };
 
 function update(timestamp) {
@@ -62,6 +65,7 @@ function update(timestamp) {
     Draw6();
     draw7();
     Draw9();
+    Draw11();
     requestAnimationFrame(update);
 }
 
@@ -129,6 +133,14 @@ function draw() {
         frameWidth2,
         frameHeight2
     );
+
+
+    context.beginPath()
+    //context.strokeStyle = primaryColor;
+    context.strokeRect(150,150,frameWidth2,frameHeight2);
+
+    context.stroke();
+
 }
 
 //section 2
@@ -332,7 +344,7 @@ function update4(currentTime) {
     let deltaTime = (currentTime - lastTime4) / 1000;
     lastTime4 = currentTime;
 
-    // Move anchor
+    //Move anchor
     //ankhorpoint.x += 1;
 
     // Verlet (predict positions)
@@ -1205,6 +1217,11 @@ let angle9 = 0;
 board9 = document.getElementById("proceduralcanv");
 
 let speed9 = 2;
+let colorpallette = {
+    r:55,
+    b:55,
+    g:55
+};
 
 let circlelistcurrent = [];
 let circlelistprevious = [];
@@ -1247,19 +1264,23 @@ function Draw9()
     ypos9 = ypos9 + Math.sin(angle9) * speed9;
     drawCircles(xpos9,ypos9,circlesize*1.5);
 
+    let chcolor = `rgb(${colorpallette.r}, ${colorpallette.g}, ${colorpallette.b})`;
     for(let i = 0; i < circlelistcurrent.length; i++)
     {
         if(i == 0)
         {
             circlelistprevious[i] = circlelistcurrent[i];
             circlelistcurrent[i] = {x: xpos9,y:ypos9};
-            drawChildCircle(circlelistcurrent[i].x,circlelistcurrent[i].y,circlesize*1.5);
+            drawChildCircle(circlelistcurrent[i].x,circlelistcurrent[i].y,circlesize*1.5,chcolor);
             continue;
         }
 
         circlelistprevious[i] = circlelistcurrent[i];
         circlelistcurrent[i] = circlelistprevious[i-1];
-        drawChildCircle(circlelistcurrent[i].x,circlelistcurrent[i].y,circlesize*1.5 - i/8);
+        drawChildCircle(circlelistcurrent[i].x,circlelistcurrent[i].y,circlesize*1.5 - i/8,chcolor);
+
+        chcolor = `rgb(${colorpallette.r + i/3}, ${colorpallette.g + i/3}, ${colorpallette.b + i/3})`;
+        
     }
 
     const innerRadius = circlesize * 0.2; 
@@ -1309,12 +1330,12 @@ function drawCircles(xpos,ypos,cSize)
 }
 
 
-function drawChildCircle(xpos,ypos,csize)
+function drawChildCircle(xpos,ypos,csize,clr)
 {
     context9.beginPath();
     context9.arc(xpos,ypos,csize,0,Math.PI*2);
     //context9.lineWidth = 1.7;
-    context9.fillStyle = primaryColor;
+    context9.fillStyle = clr;
     context9.fill();
 
 }
@@ -1360,3 +1381,452 @@ board9.addEventListener("touchmove", function(event) {
 
 });
 
+
+
+// Section 10
+
+let board10;
+let context10;
+
+board10 = document.getElementById("dollcanv");
+
+let joints = [];
+
+let force10 = {
+    x: 0,
+    y: 500
+};
+
+let changeAnkhor = false;
+let leanerdamping = 0.8;
+let holdx;
+let holdy;
+
+setJoints();
+function setJoints()
+{
+        joints.push({ //0 head
+            x: 250,
+            y: 50,
+            prevx: 250,
+            prevy: 50
+        });
+
+        joints.push({ //1 neck
+            x: 250,
+            y: 80,
+            prevx: 250,
+            prevy: 80
+        });
+
+        joints.push({ //2 left hand
+            x: 200,
+            y: 100,
+            prevx: 200,
+            prevy: 100
+        });
+
+        joints.push({ //3 right hand
+            x: 300,
+            y: 100,
+            prevx: 300,
+            prevy: 100
+        });
+
+        joints.push({ //4 belly
+            x: 250,
+            y: 160,
+            prevx: 250,
+            prevy: 160
+        });
+
+        joints.push({ //5 left leg
+            x: 200,
+            y: 250,
+            prevx: 200,
+            prevy: 250
+        });
+        joints.push({ //6 right leg
+            x: 300,
+            y: 250,
+            prevx: 300,
+            prevy: 250
+        });
+}
+
+
+let FixD10 = 100;
+
+function onloadDraw10()
+{
+    board10.width = boardWidth;
+    board10.height = boardHeight;
+
+    context10 = board10.getContext("2d");
+
+    requestAnimationFrame(Draw10);
+}
+
+let lastTime10 = 0;
+
+function Draw10(timestamp10)
+{
+    
+    if (lastTime10 === 0)
+    {
+        lastTime10 = timestamp10;
+        requestAnimationFrame(Draw10);
+        return;
+    }
+
+    let deltaTime10 = (timestamp10 - lastTime10) / 1000;
+   
+    lastTime10 = timestamp10;
+
+    if (deltaTime10 > 0.05) deltaTime10 = 0.05;
+
+    context10.clearRect(0, 0, boardWidth, boardHeight);
+
+    context10.fillStyle = primaryColor;
+    context10.fillRect(0, boardHeight - 100, boardWidth, 100);
+
+        drawLine(joints[0],joints[1])
+        drawLine(joints[2],joints[1])
+        drawLine(joints[3],joints[1])
+        drawLine(joints[1],joints[4])
+        drawLine(joints[4],joints[5])
+        drawLine(joints[4],joints[6])
+
+    for (let i = 0; i < joints.length; i++)
+    {
+        if(i != 0)
+       { let newpos = newverlet10(
+            joints[i].prevx,
+            joints[i].prevy,
+            joints[i].x,
+            joints[i].y,
+            deltaTime10
+        );
+
+        joints[i].prevx = joints[i].x;
+        joints[i].prevy = joints[i].y;
+
+        joints[i].x = newpos.x;
+        joints[i].y = newpos.y;
+    }
+
+        for(let v = 0; v < 5; v++)
+        {
+            fixDistance(joints[0],joints[1],30,false);
+
+           fixDistance(joints[2],joints[1],70,false);
+
+           fixDistance(joints[3],joints[1],70,false);
+
+            fixDistance(joints[1],joints[4],80,false);
+            fixDistance(joints[0],joints[4],110,false);
+            
+
+            fixDistance(joints[4],joints[5],70,false);
+
+            fixDistance(joints[4],joints[6],70,false);
+
+        
+
+            
+        }
+
+
+        let csizenew = i == 0? circlesize/1.5 : circlesize /2.5;
+        context10.beginPath();
+        context10.fillStyle = "white";
+        context10.arc(joints[i].x, joints[i].y, csizenew, 0, Math.PI * 2);
+        context10.fill();
+
+
+        let constraintsupdate = constraints10(joints[i].prevy,joints[i].y);
+
+        joints[i].y = constraintsupdate.y;
+        joints[i].prevy = constraintsupdate.yp;
+    }
+   
+
+    //function fixDistance(p1, p2, restLength,isAnkhor)
+    /*if(holding)
+    {
+        joints[0].x = holdx;
+        joints[0].y = holdy;
+
+        joints[0].prevx = holdx;
+        joints[0].prevy = holdy;
+    }*/
+    
+    requestAnimationFrame(Draw10);
+}
+
+function drawLine(joints1,joints2)
+{
+    context10.beginPath();
+    context10.moveTo(joints1.x, joints1.y);   // starting point
+    context10.lineTo(joints2.x, joints2.y);   // ending point
+    context10.strokeStyle = primaryColor; // line color
+    context10.lineWidth = 5;    // thickness
+    context10.stroke();
+}
+
+function newverlet10(prevxpos, prevypos, xpos, ypos, deltatime10)
+{
+    let accelerationx = force10.x;
+    let accelerationy = force10.y;
+
+    let velx = xpos - prevxpos;
+    let vely = ypos - prevypos;
+
+    xpos += velx + accelerationx * deltatime10 * deltatime10;
+    ypos += vely + accelerationy * deltatime10 * deltatime10;
+
+    return { x: xpos, y: ypos };
+}
+
+function constraints10(yprevious,ypos)
+{
+   
+   let newyprerious;
+   let difference = (ypos - yprevious) * leanerdamping;
+   if(ypos > boardHeight - 100 - circlesize/1.5)
+   {
+     ypos = boardHeight - 100 - circlesize/1.5;
+     newyprerious = (ypos + difference); 
+     return {yp: newyprerious,y:ypos}
+
+   }
+   else
+   {
+    return {yp: yprevious,y:ypos};
+   }
+
+   
+}
+let holding = false;
+
+board10.addEventListener("mousedown", function(event){
+    holding = true;
+});
+
+window.addEventListener("mouseup", function(){
+    holding = false;
+});
+
+
+board10.addEventListener("mousemove", function(event){
+
+    if(holding)
+    {
+        const rect = board10.getBoundingClientRect();
+
+        let mousex = event.clientX - rect.left;
+        let mousey = event.clientY - rect.top;
+
+        joints[0].x = mousex;
+        joints[0].y = mousey;
+        
+        joints[0].prevx = mousex;
+        joints[0].prevy = mousey;
+
+        holdx = mousex;
+        holdy = mousey;
+    }
+
+});
+
+
+//section 11
+
+
+let board11;
+let context11;
+ let velocity11 = 6;
+let fireworkpos = [];
+
+let flames = [];
+
+let acceleration11 = 0.25;
+
+
+let fireworkColors = [
+"#FF6B6B",
+"#FF8A65",
+"#FFA07A",
+"#FFB74D",
+"#FFD54F",
+"#FFE082",
+"#F48FB1",
+"#CE93D8",
+"#B39DDB",
+"#9575CD",
+"#64B5F6",
+"#4FC3F7",
+"#81C784",
+"#AED581",
+"#FFAB91",
+"#FFCC80",
+"#F06292",
+"#BA68C8",
+"#7986CB",
+"#90CAF9"
+];
+
+board11 = document.getElementById("ParticleCanv");
+function onloadDraw11()
+{
+    board11.height = boardHeight;
+    board11.width = boardWidth;
+
+    context11 = board11.getContext("2d");
+}
+
+function Draw11()
+{
+    context11.clearRect(0,0,boardWidth,boardHeight);
+
+    for(let j = fireworkpos.length - 1; j >=0; j--)
+    {
+        if(fireworkpos[j].y <= fireworkpos[j].m)
+        {
+            blow(fireworkpos[j].x,fireworkpos[j].y)
+            fireworkpos.splice(j, 1);
+        }
+    }
+
+    for(let i = 0; i < fireworkpos.length; i++)
+    {
+        let p = fireworkpos[i];
+
+        // store trail point
+        p.trail.push({x: p.x, y: p.y});
+
+        if(p.trail.length > 10)
+        {
+            p.trail.shift();
+        }
+
+        // draw trail
+        let trailSize11 = circlesize/6;
+        for(let t = 0; t < p.trail.length; t++)
+        {
+            context11.beginPath();
+            context11.fillStyle = "rgba(255, 255, 255, 0.34)";
+            trailSize11 += 0.5;
+            context11.arc(p.trail[t].x, p.trail[t].y, trailSize11, 0, Math.PI * 2);
+            context11.fill();
+        }
+
+        
+        p.y -= velocity11;
+
+            
+        context11.beginPath();
+        context11.fillStyle = "white";
+        context11.arc(p.x, p.y, circlesize/2.5, 0, Math.PI * 2);
+        context11.fill();
+    }
+
+    for(let i = flames.length - 1; i >= 0;i--)
+    {
+        if(flames[i] > boardHeight)
+        {
+            fireworkpos.splice(i, 1);
+        }
+    }
+
+    ///flames///////////////////////////////////
+    for(let i = 0; i < flames.length;i++)
+    {
+        //trails
+        let f = flames[i];
+        f.trail.push({x:f.x,y:f.y});
+
+        if(f.trail.length > 20)
+        {
+           f.trail.shift();
+        }
+        let trailSize = 0.25;
+
+        for(let t = 0; t < f.trail.length; t++)
+        {
+            context11.beginPath();
+            context11.fillStyle = f.color;
+            trailSize += 0.15;
+            context11.arc(f.trail[t].x, f.trail[t].y, trailSize, 0, Math.PI * 2);
+            context11.fill();
+        }
+
+        context11.beginPath();
+        context11.fillStyle = flames[i].color;
+        
+        flames[i].x += flames[i].velocityx;
+        flames[i].velocityy += acceleration11;
+
+        flames[i].y += flames[i].velocityy;
+        
+        context11.arc(flames[i].x, flames[i].y, circlesize/6, 0, Math.PI * 2);
+        context11.fill();
+
+        
+    }
+    //////////////////////////////////
+}
+
+function randint(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function blow(xpos,ypos)
+{
+    let howmany = randint(5,50);
+    for(let i = 0; i < howmany; i++)
+    {
+        let velxrandom = randint(0,5);
+        let velyrandom = randint(3,-10);
+
+        let randcolor = fireworkColors[randint(0,fireworkColors.length)];
+
+        flames.push({
+        x:xpos,
+        y:ypos,
+        velocityx: velxrandom,
+        velocityy:velyrandom,
+        trail: [],
+        color:randcolor
+        });
+
+        flames.push({
+        x:xpos,
+        y:ypos,
+        velocityx: -velxrandom,
+        velocityy:velyrandom,
+        trail: [],
+        color:randcolor
+        });
+    }
+  
+}
+
+
+
+board11.addEventListener("click",function(event){
+
+    const rect = board11.getBoundingClientRect();
+
+    let mousex = event.clientX - rect.left;
+    let mousey = event.clientY - rect.top;
+
+    fireworkpos.push({
+        x:mousex,
+        y:500,
+        m:mousey,
+        trail: []
+    });
+
+
+});
