@@ -1,0 +1,87 @@
+*,
+*::before,
+*::after{
+    box-sizing:  border-box;
+}
+:root{
+    --body-bg: hsl(196, 48%, 50%);
+}
+html{
+    scroll-behavior: smooth;
+}
+
+body {
+    --button-color: rgb(54, 234, 57);
+    --text-color: rgb(103, 103, 103);
+    margin: 0;
+    font-family: Arial, sans-serif;
+     background-color: #f5f3ea; /* eggshell base */
+
+  background-color: #f5f3ea;
+  background-image: url("assets/noisy-background.jpg");
+  background-repeat: repeat;
+  background-size: 200px;
+  color: #333;
+  text-align: justify;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    ;position: sticky;
+    top: 0;
+    z-index: 1000;
+    align-items: center;
+    padding: 20px 60px;
+    background-color: rgb(112, 190, 102);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.381)
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color:white;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: hsl(117, 100%, 78%);
+    cursor: pointer;
+}
+
+.gamelogo{
+    display: flex;
+
+  align-items: center;
+  justify-content: center; /* center image */
+  padding-top: 60px; /* push content below navbar (adjust this) */
+  position: relative;
+}
+.gamelogo img{
+    height: 200px;
+    padding-left: 150px;
+
+}
+.gamelogo a {
+     position: relative;
+  right: 20px;
+  left: 100px;
+  bottom: 100px;
+  font-size: 18px; /* increase link size */
+  text-decoration: none;
+}
