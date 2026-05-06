@@ -69,20 +69,26 @@ body {
 
   align-items: center;
   justify-content: center; /* center image */
-  padding-top: 60px; /* push content below navbar (adjust this) */
-  position: relative;
+  padding-left: 120px;
 }
 .gamelogo img{
+
     height: 200px;
-    padding-left: 150px;
+    padding-left: 0px;
 
 }
 .gamelogo a {
   position: relative;
   right: 20px;
-  left: 100px;
-  bottom: 100px;
+  left: 20px;
+  bottom: 80px;
   font-size: 18px; /* increase link size */
   text-decoration: none;
  
 }
+
+
+.container{
+    padding-top: 20px;
+}
+
