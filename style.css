@@ -120,7 +120,7 @@ h1 {
     border-radius: 50%;
     margin: 50px;
     overflow: hidden;
-    background: yellow;
+    background: rgb(0, 0, 0);
 }
 
 .circle img {
